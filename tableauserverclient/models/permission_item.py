@@ -106,6 +106,10 @@ class PermissionItem(object):
             elif user_elem is not None:
                 permission_item._grantee_id = user_elem.get('id', None)
                 permission_item._grantee_type = permission_item.User
+            cap_item = CapabilityItem(grantee_id=permission_item.grantee_id)
+            cap_item.allowed = [k for (k, v) in permission_item.permissions.iteritems() if v == cap_item.Allow]
+            cap_item.denied = [k for (k, v) in permission_item.permissions.iteritems() if v == cap_item.Deny]
+            permission_item.capabilities = cap_item
             all_permission_items.append(permission_item)
         return all_permission_items
 
