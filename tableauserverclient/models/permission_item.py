@@ -57,8 +57,7 @@ class PermissionItem(object):
         self._grantee_type = None
         self._grantee_id = None
         self.permissions = {}
-        self._user_capabilities = set()
-        self._group_capabilities = set()
+        self._capabilities = set()
 
     @property
     def grantee_type(self):
@@ -79,20 +78,12 @@ class PermissionItem(object):
         self._grantee_id = value
 
     @property
-    def user_capabilities(self):
-        return self._user_capabilities
+    def capabilities(self):
+        return self._capabilities
 
-    @user_capabilities.setter
-    def user_capabilities(self, capability):
-        self._user_capabilities.add(capability)
-
-    @property
-    def group_capabilities(self):
-        return self._group_capabilities
-
-    @group_capabilities.setter
-    def group_capabilities(self, capability):
-        self._group_capabilities.add(capability)
+    @capabilities.setter
+    def capabilities(self, capability):
+        self._capabilities.add(capability)
 
     @classmethod
     def from_response(cls, resp):
